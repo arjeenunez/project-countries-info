@@ -2,19 +2,19 @@ import React from 'react';
 import { SearchIcon } from 'lucide-react';
 import Card from '../components/Card';
 
-const Countries = () => {
+const CountriesPage = () => {
     return (
         <div className='px-4 py-6 md:px-20'>
             <div className='flex flex-wrap gap-y-10 mb-8 justify-between md:mb-12'>
-                <label class='input w-full max-w-120'>
+                <label className='input w-full max-w-120'>
                     <SearchIcon />
                     <input
                         type='search'
-                        class='grow'
+                        className='grow'
                         placeholder='Search'
                     />
-                    <kbd class='kbd kbd-sm'>⌘</kbd>
-                    <kbd class='kbd kbd-sm'>K</kbd>
+                    <kbd className='kbd kbd-sm'>⌘</kbd>
+                    <kbd className='kbd kbd-sm'>K</kbd>
                 </label>
                 <select
                     defaultValue='Filter by Region'
@@ -42,4 +42,4 @@ const Countries = () => {
     );
 };
 
-export default Countries;
+export default CountriesPage;

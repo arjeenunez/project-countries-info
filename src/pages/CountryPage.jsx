@@ -1,5 +1,6 @@
 import React from 'react';
-import { Move, MoveLeftIcon } from 'lucide-react';
+import { MoveLeftIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const sample = [
     {
@@ -76,12 +77,17 @@ const sample = [
     },
 ];
 
-const Country = () => {
+const CountryPage = () => {
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate('/');
+    };
     return (
         <div className='country flex flex-col px-7 py-10 md:p-20'>
             <button
                 type='button'
                 className='country__btn btn btn-primary w-26 h-8 font-light text-sm mb-16 md:text-[16px] md:h-10 md:mb-20'
+                onClick={handleClick}
             >
                 <MoveLeftIcon />
                 Back
@@ -147,4 +153,4 @@ const Country = () => {
     );
 };
 
-export default Country;
+export default CountryPage;
