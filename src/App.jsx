@@ -2,21 +2,28 @@ import Navbar from './components/Navbar';
 import CountryPage from './pages/CountryPage';
 import CountriesPage from './pages/CountriesPage';
 import { Routes, Route } from 'react-router-dom';
+import { StateProvider } from './contexts/state.context';
+import { ThemeProvider } from './contexts/theme.context';
+import React from 'react';
 
 function App() {
     return (
         <>
-            <Navbar />
-            <Routes>
-                <Route
-                    path='/'
-                    element={<CountriesPage />}
-                />
-                <Route
-                    path='/country'
-                    element={<CountryPage />}
-                ></Route>
-            </Routes>
+            <ThemeProvider>
+                <Navbar />
+                <StateProvider>
+                    <Routes>
+                        <Route
+                            path='/'
+                            element={<CountriesPage />}
+                        />
+                        <Route
+                            path='/country'
+                            element={<CountryPage />}
+                        />
+                    </Routes>
+                </StateProvider>
+            </ThemeProvider>
         </>
     );
 }

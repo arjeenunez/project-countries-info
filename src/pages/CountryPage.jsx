@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { MoveLeftIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
