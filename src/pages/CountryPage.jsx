@@ -84,6 +84,7 @@ const CountryPage = () => {
     };
     return (
         <div className='country flex flex-col px-7 py-10 md:p-20'>
+            {/* Back button */}
             <button
                 type='button'
                 className='country__btn btn btn-primary w-26 h-8 font-light text-sm mb-16 md:text-[16px] md:h-10 md:mb-20'
@@ -92,16 +93,19 @@ const CountryPage = () => {
                 <MoveLeftIcon />
                 Back
             </button>
+            {/* Country description */}
             <div className='md:flex md:justify-between md:items-center'>
+                {/* Country flag image */}
                 <img
                     src='https://flagcdn.com/w320/be.png' //NOTE: SAMPLE ONLY
                     alt='flag'
                     className='country__img h-full w-full max-w-140 max-h-57.25 mb-11 md:max-h-100 md:mb-0'
                 />
+                {/* Country details */}
                 <div className='w-full md:max-w-144 flex flex-col md:justify-center md:h-fit'>
                     <h1 className='country__header text-[22px] font-extrabold tracking-[-2%] mb-6 md:text-[32px]'>Belgium</h1>
                     <div className='h-69 flex flex-col justify-between mb-10 md:flex-row md:h-fit md:mb-18'>
-                        {/* Data#1 */}
+                        {/* Details 1 */}
                         <ul className='h-37 flex flex-col justify-between'>
                             {new Array(5).fill(0).map((el, i) => (
                                 <li
@@ -112,7 +116,7 @@ const CountryPage = () => {
                                 </li>
                             ))}
                         </ul>
-                        {/* Data#2 */}
+                        {/* Details 2 */}
                         <ul className='h-21 flex flex-col justify-between'>
                             {new Array(3).fill(0).map((el, i) => (
                                 <li
@@ -124,6 +128,7 @@ const CountryPage = () => {
                             ))}
                         </ul>
                     </div>
+                    {/* Bordering countries */}
                     <div className='w-full h-17 flex flex-row flex-wrap justify-between gap-y-4 md:h-fit md:justify-start md:items-center'>
                         <h2 className='country__subheader text-[16px] font-semibold mr-4'>Border Countries:</h2>
                         <div className='flex gap-x-2.5'>
