@@ -1,14 +1,19 @@
 import { useContext } from 'react';
 import { MoonIcon, SunIcon, Trash2Icon, DownloadIcon, Loader2Icon, SunMoonIcon } from 'lucide-react';
 import { ThemeContext } from '../contexts/theme.context';
+import { DataContext, DataDispatchContext } from '../contexts/data.context';
 
 const Navbar = () => {
     const {
-        mode: { modes, modeSelect },
+        mode: { modeSelect },
         toggleMode,
     } = useContext(ThemeContext);
-    console.log(modes, modeSelect);
-    const keepDownload = true; // NOTE: SAMPLE ONLY
+    const { userDownload } = useContext(DataContext);
+    const dispatch = useContext(DataDispatchContext);
+    const handleClick = () => {
+        dispatch({ type: 'UPDATE_USER_DOWNLOAD' });
+    };
+
     return (
         <div className='navbar h-20 bg-base-300 px-4 text-sm font-extrabold tracking-[-0.6%] md:px-20'>
             {/* Logo-link - leftmost component */}
@@ -55,16 +60,17 @@ const Navbar = () => {
                 <button
                     type='button'
                     className='navbar__btn--load btn text-xs md:btn-md md:text-[16px]'
+                    onClick={handleClick}
                 >
-                    {keepDownload ? (
+                    {userDownload ? (
                         <>
                             <Trash2Icon className='navbar__btn--icon size-4 md:size-6 pointer-events-none' />
-                            <span className='navbar__btn--text hidden font-semibold md:block pointer-events-none'>Delete Countries</span>
+                            <span className='navbar__btn--text hidden font-semibold md:block pointer-events-none'>Delete data</span>
                         </>
                     ) : (
                         <>
                             <DownloadIcon className='navbar__btn--icon size-4 md:size-6 pointer-events-none' />
-                            <span className='navbar__btn--text hidden font-semibold md:block pointer-events-none'>Load Countries</span>
+                            <span className='navbar__btn--text hidden font-semibold md:block pointer-events-none'>Download data</span>
                         </>
                     )}
                 </button>

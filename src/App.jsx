@@ -11,8 +11,8 @@ function App() {
         <>
             <ThemeProvider>
                 <ThemeContainer>
-                    <Navbar />
                     <DataProvider>
+                        <Navbar />
                         <Routes>
                             <Route
                                 path='/'
