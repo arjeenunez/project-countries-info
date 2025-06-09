@@ -8,7 +8,7 @@ const Navbar = () => {
         mode: { modeSelect },
         toggleMode,
     } = useContext(ThemeContext);
-    const { userDownload } = useContext(DataContext);
+    const { userDownload, isLoading } = useContext(DataContext);
     const dispatch = useContext(DataDispatchContext);
     const handleClick = () => {
         dispatch({ type: 'UPDATE_USER_DOWNLOAD' });
@@ -62,7 +62,9 @@ const Navbar = () => {
                     className='navbar__btn--load btn text-xs md:btn-md md:text-[16px]'
                     onClick={handleClick}
                 >
-                    {userDownload ? (
+                    {isLoading ? (
+                        <Loader2Icon className='animate-spin' />
+                    ) : userDownload ? (
                         <>
                             <Trash2Icon className='navbar__btn--icon size-4 md:size-6 pointer-events-none' />
                             <span className='navbar__btn--text hidden font-semibold md:block pointer-events-none'>Delete data</span>

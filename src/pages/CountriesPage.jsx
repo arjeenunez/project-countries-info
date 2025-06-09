@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { SearchIcon } from 'lucide-react';
+import { SearchIcon, Loader2Icon, Loader } from 'lucide-react';
 import Card from '../components/Card';
 import { Link } from 'react-router-dom';
 import { DataContext, DataDispatchContext } from '../contexts/data.context';
 
 const CountriesPage = () => {
     // const countries = new Array(26).fill({ flags: { png: '...' }, name: { common: 'Sample Name' }, population: 10000, region: 'Sample Region', capital: 'Sample Capital' });
-    const { countries, setToDisplay } = useContext(DataContext);
+    const { countries, setToDisplay, isLoading } = useContext(DataContext);
     const dispatch = useContext(DataDispatchContext);
     const handleClickLoadMore = () => {
         dispatch({ type: 'UPDATE_DISPLAY' });
@@ -40,7 +40,9 @@ const CountriesPage = () => {
                 </select>
             </div>
             <div className='flex flex-wrap justify-center gap-y-10 md:justify-between md:gap-y-19 mb-10'>
-                {!countries ? (
+                {isLoading ? (
+                    <Loader2Icon className='size-30 animate-spin' />
+                ) : !countries ? (
                     <p className='w-80 text-center italic text-gray-400 md:w-full'>Nothing to display. Download and cache from the API. Disabled input and buttons.</p>
                 ) : (
                     countries?.slice(0, setToDisplay).map((country, i) => (
