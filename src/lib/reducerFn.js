@@ -4,7 +4,7 @@ const reducerFn = (state, action) => {
             if (state.userDownload === null) return { ...state, userDownload: false };
             return { ...state, userDownload: !state.userDownload };
         case 'UPDATE_LOADING':
-            return { ...state, isLoadingCountries: action.payload };
+            return { ...state, isLoading: action.payload };
         case 'UPDATE_COUNTRIES':
             return { ...state, countries: action.payload };
         case 'UPDATE_COUNTRY':
