@@ -5,8 +5,5 @@ export default function useInput(defaultState) {
     const handleChangeInputValue = data => {
         setInputValue(data);
     };
-    const resetInputValue = () => {
-        setInputValue('');
-    };
-    return [inputValue, handleChangeInputValue, resetInputValue];
+    return [inputValue, handleChangeInputValue];
 }

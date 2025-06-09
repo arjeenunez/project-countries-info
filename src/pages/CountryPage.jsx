@@ -1,4 +1,3 @@
-import React, { useContext } from 'react';
 import { MoveLeftIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -78,17 +77,37 @@ const sample = [
 ];
 
 const CountryPage = () => {
-    const navigate = useNavigate();
-    const handleClick = () => {
-        navigate('/');
+    // const navigate = useNavigate();
+    // const handleClick = () => {
+    //     navigate('/');
+    // };
+
+    // NOTE: SAMPLE ONLY
+    const country = {
+        name: {
+            common: 'Belgium',
+            official: 'Kingdom of Belgium',
+            nativeName: {
+                deu: { official: 'KÃ¶nigreich Belgien', common: 'Belgien' },
+            },
+        },
+        region: 'Europe',
+        subregion: 'Western Europe',
+        flags: { png: 'https://flagcdn.com/w320/be.png' },
+        capital: ['Brussels'],
+        tld: ['.be'],
+        currencies: { EUR: { symbol: 'â‚¬', name: 'Euro' } },
+        languages: { deu: 'German', fra: 'French', nld: 'Dutch' },
+        borders: ['FRA', 'DEU', 'LUX', 'NLD'],
     };
+
     return (
         <div className='country flex flex-col px-7 py-10 md:p-20'>
             {/* Back button */}
             <button
                 type='button'
                 className='country__btn btn btn-primary w-26 h-8 font-light text-sm mb-16 md:text-[16px] md:h-10 md:mb-20'
-                onClick={handleClick}
+                // onClick={handleClick}
             >
                 <MoveLeftIcon />
                 Back

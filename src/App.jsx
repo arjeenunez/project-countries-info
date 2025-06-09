@@ -1,28 +1,30 @@
 import Navbar from './components/Navbar';
 import CountryPage from './pages/CountryPage';
 import CountriesPage from './pages/CountriesPage';
+import ThemeContainer from './components/ThemeContainer';
 import { Routes, Route } from 'react-router-dom';
-import { StateProvider } from './contexts/state.context';
 import { ThemeProvider } from './contexts/theme.context';
-import React from 'react';
+import { DataProvider } from './contexts/data.context';
 
 function App() {
     return (
         <>
             <ThemeProvider>
-                <Navbar />
-                <StateProvider>
-                    <Routes>
-                        <Route
-                            path='/'
-                            element={<CountriesPage />}
-                        />
-                        <Route
-                            path='/:id'
-                            element={<CountryPage />}
-                        />
-                    </Routes>
-                </StateProvider>
+                <ThemeContainer>
+                    <Navbar />
+                    <DataProvider>
+                        <Routes>
+                            <Route
+                                path='/'
+                                element={<CountriesPage />}
+                            />
+                            <Route
+                                path='/:id'
+                                element={<CountryPage />}
+                            />
+                        </Routes>
+                    </DataProvider>
+                </ThemeContainer>
             </ThemeProvider>
         </>
     );

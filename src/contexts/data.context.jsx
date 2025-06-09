@@ -2,12 +2,18 @@ import React, { createContext, useEffect, useReducer } from 'react';
 import { axiosInstance } from '../lib/axios.js';
 import reducerFn from '../lib/reducerFn.js';
 
-const StateContext = createContext();
-const DispatchContext = createContext();
+const DataContext = createContext();
+const DataDispatchContext = createContext();
 
-const defaultState = { keepDownload: false, countries: null, isLoadingCountries: false, isLightMode: true, localKey: 'countries', setToDisplay: 8 };
+const defaultState = { userKeepDownload: false, countries: null, country: null, isLoading: false, localKey: 'countries', setToDisplay: 8 };
 
-function StateProvider({ children }) {
+function DataProvider({ children }) {
+    // REMINDER: UseEffect for state data.
+    // 1. Load default data.
+    // 2. Check if state exists in local storage upon mount
+    // 3. Check if countries data in the state exists, if not call API to populate
+    // 4. Provide global state data to components.
+
     useEffect(() => {
         const localData = localStorage.getItem(defaultState.localKey);
         if (localData) {
@@ -18,7 +24,7 @@ function StateProvider({ children }) {
             }
         }
         const fetchData = async () => {
-            console.log('Calling API and downloading data');
+            console.log('Calling API and downloading data'); // NOTE: FOR DEVELOPMENT - CHECKING
             dispatch({ type: 'SET_LOADING', payload: true });
             try {
                 const res = await axiosInstance.get('europe');
@@ -41,10 +47,10 @@ function StateProvider({ children }) {
     const [state, dispatch] = useReducer(reducerFn, defaultState);
 
     return (
-        <StateContext.Provider value={state}>
-            <DispatchContext.Provider value={dispatch}>{children}</DispatchContext.Provider>
-        </StateContext.Provider>
+        <DataContext.Provider value={state}>
+            <DataDispatchContext.Provider value={dispatch}>{children}</DataDispatchContext.Provider>
+        </DataContext.Provider>
     );
 }
 
-export { DispatchContext, StateContext, StateProvider };
+export { DataDispatchContext, DataContext, DataProvider };

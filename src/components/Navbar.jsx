@@ -1,18 +1,16 @@
-import React, { useContext } from 'react';
-import { MoonIcon, SunIcon, Trash2Icon, DownloadIcon, Loader2Icon } from 'lucide-react';
-import Button from './Button';
-import { StateContext, DispatchContext } from '../contexts/state.context';
+import { useContext } from 'react';
+import { MoonIcon, SunIcon, Trash2Icon, DownloadIcon, Loader2Icon, SunMoonIcon } from 'lucide-react';
 import { ThemeContext } from '../contexts/theme.context';
 
 const Navbar = () => {
-    const isLightMode = true; // NOTE: SAMPLE ONLY
-    const toggleMode = () => {}; // NOTE: SAMPLE ONLY
+    const {
+        mode: { modes, modeSelect },
+        toggleMode,
+    } = useContext(ThemeContext);
+    console.log(modes, modeSelect);
     const keepDownload = true; // NOTE: SAMPLE ONLY
     return (
-        <div
-            data-theme={isLightMode ? 'light' : 'dark'}
-            className='navbar h-20 bg-base-300 px-4 text-sm font-extrabold tracking-[-0.6%] md:px-20'
-        >
+        <div className='navbar h-20 bg-base-300 px-4 text-sm font-extrabold tracking-[-0.6%] md:px-20'>
             {/* Logo-link - leftmost component */}
             <div className='navbar-start'>
                 <a
@@ -30,13 +28,18 @@ const Navbar = () => {
                     className='navbar__btn--theme btn text-xs md:btn-md md:text-[16px] mr-4'
                     onClick={toggleMode}
                 >
-                    {isLightMode ? (
+                    {modeSelect % 3 === 0 ? (
                         <>
-                            <SunIcon
+                            <SunMoonIcon
                                 fill='white'
                                 className='navbar__btn--icon size-4 md:size-6 pointer-events-none'
                             />
-                            <span className='navbar__btn--text hidden font-semibold md:block pointer-events-none'>Light Mode</span>
+                            <span className='navbar__btn--text hidden font-semibold md:block pointer-events-none'>Auto</span>
+                        </>
+                    ) : modeSelect % 3 === 1 ? (
+                        <>
+                            <SunIcon className='navbar__btn--icon size-4 md:size-6 pointer-events-none' />
+                            <span className='navbar__btn--text hidden font-semibold md:block pointer-events-none'>Light</span>
                         </>
                     ) : (
                         <>
@@ -44,7 +47,7 @@ const Navbar = () => {
                                 fill='white'
                                 className='navbar__btn--icon size-4 md:size-6 pointer-events-none'
                             />
-                            <span className='navbar__btn--text hidden font-semibold md:block pointer-events-none'>Dark Mode</span>
+                            <span className='navbar__btn--text hidden font-semibold md:block pointer-events-none'>Dark</span>
                         </>
                     )}
                 </button>
