@@ -11,7 +11,6 @@ const CountriesPage = () => {
     const handleClickLoadMore = () => {
         dispatch({ type: 'UPDATE_DISPLAY' });
     };
-    console.log(countries);
     return (
         <div className='min-h-dvh px-4 py-6 md:px-20'>
             <div className='flex flex-wrap gap-y-10 mb-8 justify-between md:mb-12'>
@@ -41,7 +40,7 @@ const CountriesPage = () => {
             </div>
             <div className='flex flex-wrap justify-center gap-y-10 md:justify-between md:gap-y-19 mb-10'>
                 {isLoading ? (
-                    <Loader2Icon className='size-30 animate-spin' />
+                    <Loader2Icon className='size-30 text-center animate-spin w-full' />
                 ) : !countries ? (
                     <p className='w-80 text-center italic text-gray-400 md:w-full'>Nothing to display. Download and cache from the API. Disabled input and buttons.</p>
                 ) : (
