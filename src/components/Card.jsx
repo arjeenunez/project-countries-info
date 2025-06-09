@@ -11,7 +11,7 @@ const Card = ({ flag, name, population, region, capital }) => {
                 />
             </figure>
             <div className='card-body p-6'>
-                <h2 className='card-title text-lg font-extrabold mb-4'>{capital}</h2>
+                <h2 className='card-title text-lg font-extrabold mb-4'>{name}</h2>
                 <ul className='flex flex-col justify-between'>
                     <li className='text-sm font-semibold'>
                         Population: <span className='font-light'>{population}</span>

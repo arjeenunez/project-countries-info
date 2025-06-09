@@ -1,16 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { SearchIcon, Loader2Icon, Loader } from 'lucide-react';
 import Card from '../components/Card';
 import { Link } from 'react-router-dom';
 import { DataContext, DataDispatchContext } from '../contexts/data.context';
 
 const CountriesPage = () => {
-    // const countries = new Array(26).fill({ flags: { png: '...' }, name: { common: 'Sample Name' }, population: 10000, region: 'Sample Region', capital: 'Sample Capital' });
     const { countries, setToDisplay, isLoading } = useContext(DataContext);
+    const [inputValue, setInputValue] = useState('');
+    let countriesDisplay = countries;
+    const handleChangeInputValue = e => {
+        setInputValue(prevState => e.target.value);
+        countriesDisplay = countries?.filter(el => el.name.common.toLowerCase().includes(e.target.value));
+        console.log(countriesDisplay);
+    };
     const dispatch = useContext(DataDispatchContext);
     const handleClickLoadMore = () => {
         dispatch({ type: 'UPDATE_DISPLAY' });
     };
+    console.log(inputValue);
     return (
         <div className='min-h-dvh px-4 py-6 md:px-20'>
             <div className='flex flex-wrap gap-y-10 mb-8 justify-between md:mb-12'>
@@ -21,6 +28,8 @@ const CountriesPage = () => {
                         className='grow:'
                         placeholder='Search'
                         disabled={countries ? false : true}
+                        value={inputValue}
+                        onChange={handleChangeInputValue}
                     />
                     <kbd className='kbd kbd-sm'>⌘</kbd>
                     <kbd className='kbd kbd-sm'>K</kbd>
@@ -44,10 +53,11 @@ const CountriesPage = () => {
                 ) : !countries ? (
                     <p className='w-80 text-center italic text-gray-400 md:w-full'>Nothing to display. Download and cache from the API. Disabled input and buttons.</p>
                 ) : (
-                    countries?.slice(0, setToDisplay).map((country, i) => (
+                    countriesDisplay?.slice(0, setToDisplay).map((country, i) => (
                         <Link
                             to={`/${country.name.common}`}
                             key={i}
+                            data={country}
                         >
                             <Card
                                 flag={country.flags.png}
@@ -55,6 +65,7 @@ const CountriesPage = () => {
                                 population={Intl.NumberFormat(navigator.language, { style: 'decimal', useGrouping: true }).format(country.population)}
                                 region={country.region}
                                 capital={country.capital}
+                                data={country}
                             />
                         </Link>
                     ))
