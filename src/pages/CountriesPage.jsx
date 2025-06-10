@@ -9,7 +9,6 @@ const CountriesPage = () => {
     const { countries, setToDisplay, isLoading, toDisplay } = useContext(DataContext);
     const dispatch = useContext(DataDispatchContext);
     const [inputValue, setInputValue] = useState('');
-    let countriesDisplay = countries;
     const handleChangeInputValue = e => {
         setInputValue(e.target.value);
         dispatch({ type: 'READ_COUNTRIES', payload: e.target.value || '' });
@@ -46,7 +45,7 @@ const CountriesPage = () => {
                     <option value={'oceania'}>Oceania</option>
                 </select>
             </div>
-            <div className='flex flex-wrap justify-center gap-y-10 md:justify-between md:gap-y-19 mb-10'>
+            <div className='flex flex-wrap justify-center gap-y-10 gap-x-5 md:gap-y-19 md:gap-x-19 sm:gap-x-10 mb-10'>
                 {isLoading ? (
                     <Loader2Icon className='size-30 text-center animate-spin w-full' />
                 ) : !toDisplay ? (
