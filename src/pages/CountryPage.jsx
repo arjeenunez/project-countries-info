@@ -36,7 +36,7 @@ const CountryPage = () => {
     const countryBorders = country?.borders?.map(el => countries?.find(e => e.cca3 === el).name.common) || [];
 
     return (
-        <div className='country flex flex-col px-7 py-10 md:p-20'>
+        <div className='country flex flex-col px-7 py-10 md:p-15'>
             {/* Back button */}
             <button
                 type='button'
@@ -55,7 +55,7 @@ const CountryPage = () => {
                     <img
                         src={`${countryFlag}`} //NOTE: SAMPLE ONLY
                         alt='flag'
-                        className='country__img h-full w-full max-w-140 max-h-57.25 mb-11 md:max-h-100 md:mb-0'
+                        className='country__img h-full w-full max-w-140 max-h-57.25 mb-11 md:max-h-100 md:mb-0 border border-black/20'
                     />
                     {/* Country details */}
                     <div className='w-full md:max-w-144 flex flex-col md:justify-center md:h-fit'>

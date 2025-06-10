@@ -18,7 +18,7 @@ const CountriesPage = () => {
         dispatch({ type: 'UPDATE_DISPLAY' });
     };
     return (
-        <div className='min-h-dvh px-4 py-6 md:px-20'>
+        <div className='min-h-fit px-4 py-6 md:px-20'>
             <div className='flex flex-wrap gap-y-10 mb-8 justify-between md:mb-12'>
                 <label className='input w-full max-w-120'>
                     <SearchIcon />
