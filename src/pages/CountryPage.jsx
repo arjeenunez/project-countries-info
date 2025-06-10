@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { MoveLeftIcon } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { DataContext } from '../contexts/data.context';
+import { DataContext, DataDispatchContext } from '../contexts/data.context';
 import Listitem from '../components/Listitem';
 import { Link } from 'react-router-dom';
 
 const CountryPage = () => {
     const { countries } = useContext(DataContext);
+    const dispatch = useContext(DataDispatchContext);
     const params = useParams();
 
     const arrayBuild = obj => {
@@ -20,6 +21,7 @@ const CountryPage = () => {
 
     const navigate = useNavigate();
     const handleClick = () => {
+        dispatch({ type: 'READ_COUNTRIES', payload: '' });
         navigate('/');
     };
 
