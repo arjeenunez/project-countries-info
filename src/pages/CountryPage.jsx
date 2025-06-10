@@ -33,7 +33,7 @@ const CountryPage = () => {
     const countryLanguages = arrayBuild(country?.languages)?.join(', ');
     const countryNativeName = arrayBuild(country?.name.nativeName)?.at(0).common;
     const countryCurrencies = arrayBuild(country?.currencies)?.at(0).name;
-    const countryBorders = country?.borders.map(el => countries?.find(e => e.cca3 === el).name.common);
+    const countryBorders = country?.borders?.map(el => countries?.find(e => e.cca3 === el).name.common) || [];
 
     return (
         <div className='country flex flex-col px-7 py-10 md:p-20'>

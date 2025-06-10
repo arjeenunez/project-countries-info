@@ -2,7 +2,7 @@ import React from 'react';
 
 const Card = ({ flag, name, population, region, capital }) => {
     return (
-        <div className='card bg-base-300 w-66 h-84 rounded-md'>
+        <div className='card bg-base-300 w-66 h-84 rounded-md border border-black/10 shadow-2xl shadow-black/10'>
             <figure>
                 <img
                     src={`${flag}`}

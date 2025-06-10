@@ -1,23 +1,22 @@
 import React, { useContext, useState } from 'react';
-import { SearchIcon, Loader2Icon, Loader } from 'lucide-react';
+import { SearchIcon, Loader2Icon } from 'lucide-react';
 import Card from '../components/Card';
 import { Link } from 'react-router-dom';
 import { DataContext, DataDispatchContext } from '../contexts/data.context';
+import { DataProvider } from '../contexts/data.context';
 
 const CountriesPage = () => {
-    const { countries, setToDisplay, isLoading } = useContext(DataContext);
+    const { countries, setToDisplay, isLoading, toDisplay } = useContext(DataContext);
+    const dispatch = useContext(DataDispatchContext);
     const [inputValue, setInputValue] = useState('');
     let countriesDisplay = countries;
     const handleChangeInputValue = e => {
-        setInputValue(prevState => e.target.value);
-        countriesDisplay = countries?.filter(el => el.name.common.toLowerCase().includes(e.target.value));
-        console.log(countriesDisplay);
+        setInputValue(e.target.value);
+        dispatch({ type: 'READ_COUNTRIES', payload: e.target.value || '' });
     };
-    const dispatch = useContext(DataDispatchContext);
     const handleClickLoadMore = () => {
         dispatch({ type: 'UPDATE_DISPLAY' });
     };
-    console.log(inputValue);
     return (
         <div className='min-h-dvh px-4 py-6 md:px-20'>
             <div className='flex flex-wrap gap-y-10 mb-8 justify-between md:mb-12'>
@@ -50,10 +49,10 @@ const CountriesPage = () => {
             <div className='flex flex-wrap justify-center gap-y-10 md:justify-between md:gap-y-19 mb-10'>
                 {isLoading ? (
                     <Loader2Icon className='size-30 text-center animate-spin w-full' />
-                ) : !countries ? (
+                ) : !toDisplay ? (
                     <p className='w-80 text-center italic text-gray-400 md:w-full'>Nothing to display. Download and cache from the API. Disabled input and buttons.</p>
                 ) : (
-                    countriesDisplay?.slice(0, setToDisplay).map((country, i) => (
+                    toDisplay?.slice(0, setToDisplay).map((country, i) => (
                         <Link
                             to={`/${country.name.common}`}
                             key={i}
@@ -74,7 +73,7 @@ const CountriesPage = () => {
             <div className='text-center'>
                 <button
                     type='button'
-                    className='btn btn-primary w-full md:w-60'
+                    className={`btn btn-primary w-full md:w-60 ${countries ? '' : 'hidden'}`}
                     onClick={handleClickLoadMore}
                     disabled={countries ? false : true}
                 >

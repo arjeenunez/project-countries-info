@@ -11,8 +11,10 @@ const reducerFn = (state, action) => {
             return { ...state, country: action.payload };
         case 'UPDATE_DISPLAY':
             return { ...state, setToDisplay: state.setToDisplay + 8 };
+        case 'READ_COUNTRIES':
+            return { ...state, toDisplay: state.countries?.filter(e => e.name.common.toLowerCase().includes(action.payload.toLowerCase() || '')) };
         case 'UPDATE_LOCALSTORAGE':
-            localStorage.setItem(state.localKey, JSON.stringify({ ...state, countries: action.payload1, userDownload: action.payload2 }));
+            localStorage.setItem(state.localKey, JSON.stringify({ ...state, countries: action.payload1, userDownload: action.payload2, toDisplay: action.payload1 }));
             return state;
         case 'DELETE_LOCALSTORAGE':
             localStorage.removeItem(state.localKey);

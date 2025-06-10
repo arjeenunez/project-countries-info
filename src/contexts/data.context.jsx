@@ -5,7 +5,7 @@ import reducerFn from '../lib/reducerFn.js';
 const DataContext = createContext();
 const DataDispatchContext = createContext();
 
-const defaultState = { localKey: 'countries', userDownload: false, countries: null, country: null, isLoading: false, setToDisplay: 8 };
+const defaultState = { localKey: 'countries', userDownload: false, countries: null, country: null, isLoading: false, setToDisplay: 8, toDisplay: null };
 
 function DataProvider({ children }) {
     // REMINDER: UseEffect for state data.
@@ -23,6 +23,7 @@ function DataProvider({ children }) {
             if (parsed?.countries) {
                 dispatch({ type: 'UPDATE_COUNTRIES', payload: parsed.countries });
                 dispatch({ type: 'UPDATE_USER_DOWNLOAD' });
+                dispatch({ type: 'READ_COUNTRIES', payload: '' });
                 return;
             }
             return;
@@ -35,6 +36,7 @@ function DataProvider({ children }) {
         if (!userDownload && countries) {
             console.log('Delete localStorage');
             dispatch({ type: 'UPDATE_COUNTRIES', payload: null });
+            dispatch({ type: 'READ_COUNTRIES', payload: '' });
             dispatch({ type: 'DELETE_LOCALSTORAGE' });
         }
         if (userDownload && !countries) {
@@ -48,6 +50,7 @@ function DataProvider({ children }) {
                     const res5 = await axiosInstance.get('oceania');
                     const arr = [...res.data, ...res2.data, ...res3.data, ...res4.data, ...res5.data];
                     dispatch({ type: 'UPDATE_COUNTRIES', payload: arr });
+                    dispatch({ type: 'READ_COUNTRIES', payload: '' });
                     dispatch({ type: 'UPDATE_LOCALSTORAGE', payload1: arr, payload2: true });
                     console.log('Calling API and downloading data - ', localStorage); // NOTE: FOR DEVELOPMENT
                 } catch (error) {
